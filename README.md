@@ -10,13 +10,13 @@ Check [this link](https://depchecker.com/blog/analyze-project-deps/) for more in
 
 You can either install it globally 
 ```bash
-yarn install -g @naturalcycles/dependency-check
+npm install -g @naturalcycles/dependency-check
 ```
 
 or as one of your dev dependencies.
 
 ```bash
-yarn install -d @naturalcycles/dependency-check
+npm install --save-dev @naturalcycles/dependency-check
 ```
 
 ## Running the checker
