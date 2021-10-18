@@ -1,6 +1,6 @@
 # Dependency Checker
 
-Analyze your NPM and JAVA dependencies that your project depends on.
+Analyze NPM and JAVA dependencies that your project depends on.
 Quickly view a list of open issues and aggregated data for each open-source package.
 
 Check [this link](https://depchecker.com/blog/analyze-project-deps/) for more information on how packages are analyzed.
