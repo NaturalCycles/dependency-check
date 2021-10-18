@@ -20,12 +20,15 @@ runScript(async () => {
   console.info("RUNNING DEPENCENCY CHECK...");
   const argv = yargs(process.argv.slice(2)).options({
     pdf: { type: "boolean", default: true },
+    pdfName: { type: "string", default: "analysis" },
     html: { type: "boolean", default: false },
     skipCache: { type: "boolean", default: false },
+    summary: { type: "boolean", default: false },
+    only: { type: "array", default: [] },
   }).argv;
 
   const callerDirectory = await Utils.getCurrentDirectory();
-  const cachePath = `${callerDirectory}/.NCache`;
+  const cachePath = `${callerDirectory}/.nc-depcheck`;
   const cacheFile = `${cachePath}/output.json`;
 
   if (!existsSync(`${callerDirectory}/package.json`)) {
@@ -49,7 +52,10 @@ runScript(async () => {
 
     return await Gatsby.generateSite(meta, {
       pdf: argv.pdf,
+      pdfName: argv.pdfName,
       html: argv.html,
+      summary: argv.summary,
+      only: argv.only,
     });
   }
 
@@ -80,6 +86,9 @@ runScript(async () => {
 
   return await Gatsby.generateSite(meta, {
     pdf: argv.pdf,
+    pdfName: argv.pdfName,
     html: argv.html,
+    summary: argv.summary,
+    only: argv.only,
   });
 });

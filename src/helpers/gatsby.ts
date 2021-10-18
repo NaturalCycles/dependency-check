@@ -3,7 +3,7 @@ import { Utils } from "./utils";
 import { resolve as pathResolve } from "path";
 import { PackageMetaInformation } from "./types";
 import { existsSync, mkdirSync, rmdirSync, writeFileSync } from "fs";
-import { launch } from "puppeteer";
+import puppeteer from "puppeteer";
 
 function delay(time: number) {
   return new Promise(function (resolve) {
@@ -13,18 +13,21 @@ function delay(time: number) {
 
 interface GenerateSite {
   pdf: boolean;
+  pdfName: string;
   html: boolean;
+  summary: boolean;
+  only?: string[];
 }
 
 export const Gatsby = (() => {
   async function generateSite(
     meta: PackageMetaInformation,
-    { pdf, html }: GenerateSite
+    { pdf, pdfName, html, summary, only }: GenerateSite
   ): Promise<any> {
     const callerDirectory = await Utils.getCurrentDirectory();
     const libraryPath = pathResolve(__dirname, "../../");
-    const cachePath = `${callerDirectory}/.NCache`;
-    const outputDir = `${callerDirectory}/NCPublic`;
+    const cachePath = `${callerDirectory}/.nc-depcheck`;
+    const outputDir = `${callerDirectory}/nc-depcheckPublic`;
 
     if (!existsSync(cachePath)) {
       mkdirSync(cachePath);
@@ -41,13 +44,15 @@ export const Gatsby = (() => {
       const sp = spawn(`npx`, ["gatsby", "build"], {
         cwd: libraryPath,
         env: {
+          // Include all env variables from running context
           ...process.env,
-          BASE64DEPCHECK: meta?.NPM?.licenses[0] || "",
+          SUMMARY: String(summary),
+          ONLY: JSON.stringify(only),
         },
       });
 
       sp.stdout.on("data", (message) => {
-        // console.info(message.toString());
+        console.info(message.toString());
       });
 
       sp.stderr.on("data", (data) => {
@@ -65,7 +70,11 @@ export const Gatsby = (() => {
         }
 
         if (pdf) {
-          await generatePDF(libraryPath, pathResolve(outputDir, "../"));
+          await generatePDF(
+            libraryPath,
+            pathResolve(outputDir, "../"),
+            pdfName
+          );
         }
 
         if (html) {
@@ -91,7 +100,11 @@ export const Gatsby = (() => {
     });
   }
 
-  async function generatePDF(libraryPath: string, outputDir: string) {
+  async function generatePDF(
+    libraryPath: string,
+    outputDir: string,
+    pdfName: string
+  ) {
     return await new Promise((resolve, reject) => {
       const sp = spawn(`npx`, ["gatsby", "serve"], {
         cwd: libraryPath,
@@ -99,7 +112,7 @@ export const Gatsby = (() => {
       sp.stdout.on("data", async (message) => {
         if (message.toString().includes("http://localhost")) {
           console.log("...GENERATING PDF");
-          const browser = await launch();
+          const browser = await puppeteer.launch();
           const page = await browser.newPage();
           await page.setViewport({ width: 2529, height: 1250 });
           await page.goto("http://localhost:9000/", {
@@ -110,12 +123,12 @@ export const Gatsby = (() => {
           await delay(3000);
 
           await page.pdf({
-            path: `${outputDir}/analysis.pdf`,
+            path: `${outputDir}/${pdfName}.pdf`,
             printBackground: true,
           });
           await browser.close();
           sp.kill("SIGHUP");
-          console.log(`PDF generated: ${outputDir}/analysis.pdf`);
+          console.log(`PDF generated: ${outputDir}/${pdfName}.pdf`);
           resolve(true);
         }
       });

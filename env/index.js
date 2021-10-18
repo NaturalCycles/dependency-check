@@ -1,3 +1,4 @@
 module.exports = {
-  BASE64DEPCHECK: process.env.BASE64DEPCHECK,
+  SUMMARY: process.env.SUMMARY,
+  ONLY: process.env.ONLY
 };
