@@ -1,0 +1,12 @@
+diff --git a/node_modules/@types/pdfkit/index.d.ts b/node_modules/@types/pdfkit/index.d.ts
+index b878887..31ca971 100755
+--- a/node_modules/@types/pdfkit/index.d.ts
++++ b/node_modules/@types/pdfkit/index.d.ts
+@@ -436,6 +436,7 @@ declare namespace PDFKit {
+         output(fn: any): void;
+         end(): void;
+         toString(): string;
++        addNamedDestination(dest: string): void;
+     }
+ }
+ 

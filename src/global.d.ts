@@ -1,3 +1,3 @@
 declare module "pom-parser";
 declare module "xml2json";
-declare module "gatsby-env-variables";
+declare module 'pdfkit-commonmark';

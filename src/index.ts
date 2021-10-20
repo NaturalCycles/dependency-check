@@ -8,7 +8,7 @@
  * Read: https://depchecker.com/blog/analyze-project-deps/
  */
 import { runScript } from "@naturalcycles/nodejs-lib/dist/script";
-import { Gatsby } from "./helpers/gatsby";
+import { Pdf } from "./helpers/pdf";
 import { Npm } from "./helpers/npm";
 import { Pom } from "./helpers/pom";
 import { PackageMetaInformation } from "./helpers/types";
@@ -50,7 +50,7 @@ runScript(async () => {
       );
     }
 
-    return await Gatsby.generateSite(meta, {
+    return await Pdf.generate(meta, {
       pdf: argv.pdf,
       pdfName: argv.pdfName,
       html: argv.html,
@@ -84,7 +84,7 @@ runScript(async () => {
     date: new Date().toISOString(),
   };
 
-  return await Gatsby.generateSite(meta, {
+  return await Pdf.generate(meta, {
     pdf: argv.pdf,
     pdfName: argv.pdfName,
     html: argv.html,

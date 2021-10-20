@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "jsx": "react",
+    "jsxFactory": "JsxPdf.createElement",
+    "jsxFragmentFactory": "JsxPdf.Fragment",
     "target": "es2015",
     "module": "commonjs",
     "outDir": "./dist",
@@ -10,6 +12,5 @@
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/components", "src/pages"]
+  "include": ["src/**/*"]
 }

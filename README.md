@@ -65,10 +65,3 @@ npm install http-server -g
 ```bash
 cd nc-depcheckPublic && http-server
 ```
-
-
-## Running for NCBackend
-
-```bash
-GITHUB_TOKEN=<some-GH-token> nc-depcheck --pdfName "1159-SOUP Anomalies List" --only lombok joda-time jackson guava
-```
