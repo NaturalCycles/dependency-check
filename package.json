@@ -1,6 +1,6 @@
 {
   "main": "dist/index.js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "name": "@naturalcycles/dependency-check",
   "description": "NPM and JAVA dependency analyser",
   "author": "Natural Cycles Team",

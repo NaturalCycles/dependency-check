@@ -3,7 +3,7 @@ import * as pomParser from "pom-parser";
 import got from "got";
 import { Utils } from "./utils";
 import { toJson } from "xml2json";
-import GitHost, { fromUrl } from "hosted-git-info";
+import { fromUrl } from "hosted-git-info";
 import { Github } from "./github";
 import { DependencyOutput } from "./types";
 
@@ -146,6 +146,7 @@ export const Pom = (() => {
     } catch (error) {
       console.log(url);
       console.log(dependency);
+      console.log(error);
       throw new Error(`Unable to get POM for ${dependency.artifactid}`);
     }
   }

@@ -53,15 +53,3 @@ And finally build it in watch mode
 ```bash
 npm run watch
 ```
-
-## Locally serve static site
-
-After generating the site, you can use http-server to check the generated page
-
-```bash
-npm install http-server -g
-```
-
-```bash
-cd nc-depcheckPublic && http-server
-```
