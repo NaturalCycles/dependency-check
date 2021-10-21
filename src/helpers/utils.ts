@@ -19,7 +19,7 @@ export const Utils = (() => {
     return licenses;
   }
 
-  function castNumber(num: string) {
+  function castNumber(num?: string) {
     return Number(num);
   }
 

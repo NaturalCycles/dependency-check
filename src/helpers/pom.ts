@@ -104,7 +104,7 @@ export const Pom = (() => {
               version.lastIndexOf("}")
             );
 
-            dependency.version = properties[envPropertyName];
+            dependency.version = properties[envPropertyName]!;
           }
           return dependency;
         }
@@ -175,7 +175,7 @@ export const Pom = (() => {
       MAX_CONCURRENT_REQUESTS
     )) {
       const promises = chunk.map(async (packageId) => {
-        const parsedPackage = dependencies[packageId];
+        const parsedPackage = dependencies[packageId]!;
         const mavenInformation = await getPomFromCentral(parsedPackage);
         const latestVersion = await getLatestFromCentral(parsedPackage);
         const info =

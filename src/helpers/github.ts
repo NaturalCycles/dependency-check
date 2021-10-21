@@ -1,12 +1,13 @@
-import GitHost, { fromUrl } from "hosted-git-info";
+import * as GitHost from  "hosted-git-info"
+import { fromUrl } from "hosted-git-info";
 import { Utils } from "./utils";
 import got from "got";
 
 const MAX_ISSUES_TO_PULL = 100;
 const MAX_CONCURRENT_REQUESTS = 10;
 const headers =
-  (process.env.GITHUB_TOKEN && {
-    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+  (process.env['GITHUB_TOKEN'] && {
+    Authorization: `Bearer ${process.env['GITHUB_TOKEN']}`,
   }) ||
   undefined;
 
@@ -73,7 +74,7 @@ export const Github = (() => {
       throw new Error("Github rate limited");
     }
 
-    const lastLinkHeader = String(res.headers.link).split(";")[1];
+    const lastLinkHeader = String(res.headers['link']).split(";")[1];
 
     if (!lastLinkHeader) {
       return 0;
@@ -98,7 +99,7 @@ export const Github = (() => {
       throw new Error("Github rate limited");
     }
 
-    const lastLinkHeader = String(res.headers.link).split(";")[1];
+    const lastLinkHeader = String(res.headers['link']).split(";")[1];
 
     if (!lastLinkHeader) {
       return 0;

@@ -14,7 +14,7 @@ import { Pom } from "./helpers/pom";
 import { PackageMetaInformation } from "./helpers/types";
 import { Utils } from "./helpers/utils";
 import { existsSync, readFileSync } from "fs";
-import yargs = require("yargs/yargs");
+import yargs from "yargs/yargs"
 
 runScript(async () => {
   console.info("RUNNING DEPENCENCY CHECK...");
