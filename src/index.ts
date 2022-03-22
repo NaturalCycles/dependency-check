@@ -84,11 +84,13 @@ runScript(async () => {
     date: new Date().toISOString(),
   };
 
-  return await Pdf.generate(meta, {
+  await Pdf.generate(meta, {
     pdf: argv.pdf,
     pdfName: argv.pdfName,
     html: argv.html,
     summary: argv.summary,
     only: argv.only,
   });
+
+  process.exit(0)
 });
