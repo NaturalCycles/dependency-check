@@ -72,11 +72,6 @@ runScript(async () => {
     console.warn("Project has no JS dependencies");
   }
 
-
-  if(!PomPackages && !NpmPackages) {
-    throw new Error('Cannot find any dependencies')
-  }
-
   const meta: PackageMetaInformation = {
     NPM: NpmPackages && {
       packages: NpmPackages,
