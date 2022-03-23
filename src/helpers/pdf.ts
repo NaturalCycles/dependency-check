@@ -39,10 +39,10 @@ export const Pdf = (() => {
         margin: 40,
         autoFirstPage: true,
       });
-      doc.pipe(createWriteStream(pdfPath));
+      const stream = doc.pipe(createWriteStream(pdfPath));
 
-      doc.on("finish", async () => {
-        console.log("finishing");
+      stream.on("finish", async () => {
+        console.log("PDF generated");
         return resolve(true);
       });
 

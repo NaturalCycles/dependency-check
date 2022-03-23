@@ -91,6 +91,4 @@ runScript(async () => {
     summary: argv.summary,
     only: argv.only,
   });
-
-  process.exit(0)
 });
